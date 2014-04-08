@@ -85,6 +85,18 @@ AES-ECB-192  long encrypt: 0.2413  6829 cpb 429.0 kB/s
 AES-ECB-192  long decrypt: 0.2380  6736 cpb 434.9 kB/s
 AES-ECB-256  long encrypt: 0.2560  7245 cpb 404.4 kB/s
 AES-ECB-256  long decrypt: 0.2638  7468 cpb 392.3 kB/s
+
+$ openssl speed -evp aes-128-cbc aes-192-cbc aes-256-cbc -elapsed
+You have chosen to measure elapsed time instead of user CPU time.
+To get the most accurate results, try to run this
+program when this computer is idle.
+
+......(pass some info)
+
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes
+aes-192 cbc      67434.37k    69537.86k    69332.72k    69231.16k    70681.26k
+aes-256 cbc      59265.99k    60532.54k    56754.30k    54190.84k    60041.34k
+aes-128-cbc      65590.32k    68580.34k    62408.63k    77896.57k    80406.19k
 ```
 
 Why pyAES
