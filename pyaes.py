@@ -165,6 +165,13 @@ def mix_columns(block):
     # print 'MixColumns :', block
 
 
+def pad(text):
+    count = len(text.encode('utf-8'))
+    add = 16 - (count % 16)
+    entext = text + (chr(add) * add)
+    return entext
+
+
 class AES(object):
     block_size = 16
 
@@ -367,7 +374,8 @@ class CBCMode(object):
         """Encrypt data in CBC mode"""
 
         if len(datas) % self.block_size != 0:
-            raise ValueError("Plaintext length must be multiple of 16")
+            datas = pad(datas)
+            # raise ValueError("Plaintext length must be multiple of 16")
 
         data = array('B')
         data.frombytes(datas.encode())
