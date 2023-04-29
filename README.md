@@ -1,7 +1,7 @@
 pyAES
 =====
 
-AES algorithm with pure python implementation. Small modify based on [https://bitbucket.org/intgr/pyaes/](https://bitbucket.org/intgr/pyaes/) to compatible with PEP-8.
+AES algorithm with pure Python 3 implementation. Small modify based on [https://bitbucket.org/intgr/pyaes/](https://bitbucket.org/intgr/pyaes/) to compatible with PEP-8.
 
 Intro
 ---
@@ -29,74 +29,72 @@ How to use?
 ```
 Speed
 ---
-Even though pyaes is an optimized Python implementation, Python itself is still slow. It should be capable of around 80 kB/s on modern hardware; __that's 1000x slower than pure C implementations__.
+Even though pyAES is an optimized Python implementation, Python itself is still slow. It should be capable of around 300 kB/s on modern hardware; __that's 1000x slower than pure C implementations__.
 
-This is a test in My Macbook Air(CPython and PyPy):
+This is a test in My Macbook Air M1 (CPython and PyPy):
 
 ```
-$ python bench.py --all
-AES-CBC-128 short encrypt: 2.3228  67004 cpb 43.7 kB/s
-AES-CBC-128 short decrypt: 2.4256  69969 cpb 41.9 kB/s
-AES-CBC-192 short encrypt: 2.7715  79947 cpb 36.6 kB/s
-AES-CBC-192 short decrypt: 2.8919  83419 cpb 35.1 kB/s
-AES-CBC-256 short encrypt: 3.2400  93462 cpb 31.3 kB/s
-AES-CBC-256 short decrypt: 3.3679  97151 cpb 30.2 kB/s
-AES-CBC-128  long encrypt: 2.3564  66700 cpb 43.9 kB/s
-AES-CBC-128  long decrypt: 2.4683  69869 cpb 41.9 kB/s
-AES-CBC-192  long encrypt: 2.8118  79591 cpb 36.8 kB/s
-AES-CBC-192  long decrypt: 2.9336  83038 cpb 35.3 kB/s
-AES-CBC-256  long encrypt: 3.3641  95226 cpb 30.8 kB/s
-AES-CBC-256  long decrypt: 3.4369  97286 cpb 30.1 kB/s
-AES-ECB-128 short encrypt: 2.3100  66634 cpb 44.0 kB/s
-AES-ECB-128 short decrypt: 2.4134  69618 cpb 42.1 kB/s
-AES-ECB-192 short encrypt: 2.8941  83483 cpb 35.1 kB/s
-AES-ECB-192 short decrypt: 2.9094  83926 cpb 34.9 kB/s
-AES-ECB-256 short encrypt: 3.2390  93432 cpb 31.4 kB/s
-AES-ECB-256 short decrypt: 3.3983  98029 cpb 29.9 kB/s
-AES-ECB-128  long encrypt: 2.4414  69107 cpb 42.4 kB/s
-AES-ECB-128  long decrypt: 2.5723  72811 cpb 40.2 kB/s
-AES-ECB-192  long encrypt: 2.9348  83073 cpb 35.3 kB/s
-AES-ECB-192  long decrypt: 3.1270  88512 cpb 33.1 kB/s
-AES-ECB-256  long encrypt: 3.7037  104839 cpb 27.9 kB/s
-AES-ECB-256  long decrypt: 6.5956  186695 cpb 15.7 kB/s
+$ python3 bench.py --all
+AES-CBC-128 short encrypt: 0.3024  8723 cpb 335.9 kB/s
+AES-CBC-128 short decrypt: 0.3330  9605 cpb 305.0 kB/s
+AES-CBC-192 short encrypt: 0.3644  10512 cpb 278.7 kB/s
+AES-CBC-192 short decrypt: 0.4015  11581 cpb 253.0 kB/s
+AES-CBC-256 short encrypt: 0.4249  12256 cpb 239.0 kB/s
+AES-CBC-256 short decrypt: 0.4644  13397 cpb 218.7 kB/s
+AES-CBC-128  long encrypt: 0.3107  8796 cpb 333.1 kB/s
+AES-CBC-128  long decrypt: 0.3385  9583 cpb 305.7 kB/s
+AES-CBC-192  long encrypt: 0.3709  10498 cpb 279.1 kB/s
+AES-CBC-192  long decrypt: 0.4061  11496 cpb 254.8 kB/s
+AES-CBC-256  long encrypt: 0.4319  12224 cpb 239.7 kB/s
+AES-CBC-256  long decrypt: 0.4746  13433 cpb 218.1 kB/s
+AES-ECB-128 short encrypt: 0.2982  8601 cpb 340.6 kB/s
+AES-ECB-128 short decrypt: 0.3252  9381 cpb 312.3 kB/s
+AES-ECB-192 short encrypt: 0.3570  10299 cpb 284.5 kB/s
+AES-ECB-192 short decrypt: 0.3940  11365 cpb 257.8 kB/s
+AES-ECB-256 short encrypt: 0.4180  12058 cpb 243.0 kB/s
+AES-ECB-256 short decrypt: 0.4570  13183 cpb 222.2 kB/s
+AES-ECB-128  long encrypt: 0.3044  8617 cpb 340.0 kB/s
+AES-ECB-128  long decrypt: 0.3334  9437 cpb 310.4 kB/s
+AES-ECB-192  long encrypt: 0.3664  10373 cpb 282.4 kB/s
+AES-ECB-192  long decrypt: 0.3980  11265 cpb 260.1 kB/s
+AES-ECB-256  long encrypt: 0.4276  12103 cpb 242.1 kB/s
+AES-ECB-256  long decrypt: 0.4663  13199 cpb 222.0 kB/s
 
-$ pypy bench.py --all
-AES-CBC-128 short encrypt: 0.3558  10263 cpb 285.5 kB/s
-AES-CBC-128 short decrypt: 0.4569  13179 cpb 222.3 kB/s
-AES-CBC-192 short encrypt: 0.2565  7400 cpb 395.9 kB/s
-AES-CBC-192 short decrypt: 0.2916  8411 cpb 348.3 kB/s
-AES-CBC-256 short encrypt: 0.2569  7410 cpb 395.4 kB/s
-AES-CBC-256 short decrypt: 0.3692  10650 cpb 275.1 kB/s
-AES-CBC-128  long encrypt: 0.2114  5985 cpb 489.5 kB/s
-AES-CBC-128  long decrypt: 0.2103  5952 cpb 492.2 kB/s
-AES-CBC-192  long encrypt: 0.2235  6325 cpb 463.2 kB/s
-AES-CBC-192  long decrypt: 0.2317  6559 cpb 446.7 kB/s
-AES-CBC-256  long encrypt: 0.2517  7125 cpb 411.2 kB/s
-AES-CBC-256  long decrypt: 0.2549  7215 cpb 406.1 kB/s
-AES-ECB-128 short encrypt: 0.3762  10852 cpb 270.0 kB/s
-AES-ECB-128 short decrypt: 0.3265  9418 cpb 311.1 kB/s
-AES-ECB-192 short encrypt: 0.2321  6695 cpb 437.6 kB/s
-AES-ECB-192 short decrypt: 0.2962  8543 cpb 342.9 kB/s
-AES-ECB-256 short encrypt: 0.2416  6970 cpb 420.3 kB/s
-AES-ECB-256 short decrypt: 0.2562  7391 cpb 396.4 kB/s
-AES-ECB-128  long encrypt: 0.1960  5547 cpb 528.2 kB/s
-AES-ECB-128  long decrypt: 0.2123  6011 cpb 487.4 kB/s
-AES-ECB-192  long encrypt: 0.2413  6829 cpb 429.0 kB/s
-AES-ECB-192  long decrypt: 0.2380  6736 cpb 434.9 kB/s
-AES-ECB-256  long encrypt: 0.2560  7245 cpb 404.4 kB/s
-AES-ECB-256  long decrypt: 0.2638  7468 cpb 392.3 kB/s
+$ pypy3 bench.py --all
+AES-CBC-128 short encrypt: 0.0452  1305 cpb 2245.7 kB/s
+AES-CBC-128 short decrypt: 0.0425  1225 cpb 2392.4 kB/s
+AES-CBC-192 short encrypt: 0.0299  861 cpb 3401.1 kB/s
+AES-CBC-192 short decrypt: 0.0340  981 cpb 2985.4 kB/s
+AES-CBC-256 short encrypt: 0.0321  925 cpb 3168.8 kB/s
+AES-CBC-256 short decrypt: 0.0343  989 cpb 2961.1 kB/s
+AES-CBC-128  long encrypt: 0.0230  651 cpb 4501.6 kB/s
+AES-CBC-128  long decrypt: 0.0238  675 cpb 4341.5 kB/s
+AES-CBC-192  long encrypt: 0.0282  797 cpb 3674.2 kB/s
+AES-CBC-192  long decrypt: 0.0282  799 cpb 3665.8 kB/s
+AES-CBC-256  long encrypt: 0.0324  916 cpb 3196.8 kB/s
+AES-CBC-256  long decrypt: 0.0329  932 cpb 3144.0 kB/s
+AES-ECB-128 short encrypt: 0.0371  1070 cpb 2738.0 kB/s
+AES-ECB-128 short decrypt: 0.0323  932 cpb 3143.7 kB/s
+AES-ECB-192 short encrypt: 0.0278  802 cpb 3652.7 kB/s
+AES-ECB-192 short decrypt: 0.0272  783 cpb 3740.5 kB/s
+AES-ECB-256 short encrypt: 0.0321  925 cpb 3167.8 kB/s
+AES-ECB-256 short decrypt: 0.0318  917 cpb 3195.9 kB/s
+AES-ECB-128  long encrypt: 0.0227  643 cpb 4558.5 kB/s
+AES-ECB-128  long decrypt: 0.0237  672 cpb 4362.8 kB/s
+AES-ECB-192  long encrypt: 0.0270  764 cpb 3835.0 kB/s
+AES-ECB-192  long decrypt: 0.0284  805 cpb 3638.4 kB/s
+AES-ECB-256  long encrypt: 0.0317  898 cpb 3262.3 kB/s
+AES-ECB-256  long decrypt: 0.0329  933 cpb 3141.3 kB/s
 
 $ openssl speed -evp aes-128-cbc aes-192-cbc aes-256-cbc -elapsed
 You have chosen to measure elapsed time instead of user CPU time.
-To get the most accurate results, try to run this
-program when this computer is idle.
 
 ......(pass some info)
 
 type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes
-aes-192 cbc      67434.37k    69537.86k    69332.72k    69231.16k    70681.26k
-aes-256 cbc      59265.99k    60532.54k    56754.30k    54190.84k    60041.34k
-aes-128-cbc      65590.32k    68580.34k    62408.63k    77896.57k    80406.19k
+aes-192 cbc     258761.09k   271434.35k   274407.33k   273140.34k   271047.29k
+aes-256 cbc     232336.64k   237868.93k   234162.85k   238381.57k   239210.50k
+aes-128-cbc     303575.80k   316688.83k   320358.54k   318650.80k   320910.45k
 ```
 
 Why pyAES

@@ -25,9 +25,9 @@ import pyaes
 cleartext = "This is a test. What could possibly go wrong? " * 50 + '\0' * 4
 
 keys = (
-    ('128', '3afca8488ce0d5136aba87953fbd986e'.decode('hex')),
-    ('192', '35f8b4f0edcee9999d6cc995409e1d506fa8e269c2b795e6'.decode('hex')),
-    ('256', 'e6cb51df8394cd2c78055c92a55fdb44202034fdabd765feeb12b7ad61554972'.decode('hex')),
+    ('128', bytes.fromhex('3afca8488ce0d5136aba87953fbd986e')),
+    ('192', bytes.fromhex('35f8b4f0edcee9999d6cc995409e1d506fa8e269c2b795e6')),
+    ('256', bytes.fromhex('e6cb51df8394cd2c78055c92a55fdb44202034fdabd765feeb12b7ad61554972')),
 )
 texts = (
     # 500 x 52 x 4 bytes = 104000
@@ -41,7 +41,7 @@ modes = (
 )
 funcs = ('encrypt', 'decrypt')
 
-iv = 'b9de523d1e1588bf46f9084cb796684f'.decode('hex')
+iv = bytes.fromhex('b9de523d1e1588bf46f9084cb796684f')
 
 
 def benchmark(key, mode, runs, func, text):
@@ -49,7 +49,7 @@ def benchmark(key, mode, runs, func, text):
     aes = pyaes.new(key, mode, IV=iv)
 
     f = getattr(aes, func)
-    for i in xrange(runs):
+    for i in range(runs):
         f(text)
 
 
@@ -70,13 +70,13 @@ def alltests():
             for keydesc, key in keys:
                 for func in funcs:
                     result = run(key, mode, runs, func, text)
-                    print 'AES-%s-%s %5s %s: %s' % (
+                    print ('AES-%s-%s %5s %s: %s' % (
                         modedesc,
                         keydesc,
                         textdesc,
                         func,
                         result
-                    )
+                    ))
 
 
 def quicktest():
@@ -89,13 +89,13 @@ def quicktest():
     #runs *= 2
 
     result = run(key, mode, runs, func, text)
-    print 'AES-%s-%s %5s %s: %s' % (modedesc, keydesc, textdesc, func, result)
+    print ('AES-%s-%s %5s %s: %s' % (modedesc, keydesc, textdesc, func, result))
 
     # AES-CBC-256  long encrypt
     keydesc, key = keys[2]
 
     result = run(key, mode, runs, func, text)
-    print 'AES-%s-%s %5s %s: %s' % (modedesc, keydesc, textdesc, func, result)
+    print ('AES-%s-%s %5s %s: %s' % (modedesc, keydesc, textdesc, func, result))
 
 
 if __name__ == '__main__':
